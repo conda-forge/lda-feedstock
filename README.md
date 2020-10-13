@@ -5,11 +5,13 @@ Home: https://lda.readthedocs.io/en/latest/
 
 Package license: MPL-2.0
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/lda-feedstock/blob/master/LICENSE.txt)
 
 Summary: lda implements latent Dirichlet allocation (LDA) using collapsed Gibbs sampling. lda is fast and is tested on Linux, OS X, and Windows.
 
+Development: https://github.com/ariddell/lda/tree/master
 
+Documentation: https://lda.readthedocs.io/en/latest/
 
 Current build status
 ====================
@@ -57,10 +59,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_python3.6.____cpython</td>
+              <td>win_64_numpy1.16python3.6.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8349&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/lda-feedstock?branchName=master&jobName=win&configuration=win_64_python3.6.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/lda-feedstock?branchName=master&jobName=win&configuration=win_64_numpy1.16python3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr>
