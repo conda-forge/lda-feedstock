@@ -5,11 +5,13 @@ Home: https://lda.readthedocs.io/en/latest/
 
 Package license: MPL-2.0
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/lda-feedstock/blob/master/LICENSE.txt)
 
 Summary: lda implements latent Dirichlet allocation (LDA) using collapsed Gibbs sampling. lda is fast and is tested on Linux, OS X, and Windows.
 
+Development: https://github.com/ariddell/lda/tree/master
 
+Documentation: https://lda.readthedocs.io/en/latest/
 
 Current build status
 ====================
