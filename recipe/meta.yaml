@@ -29,14 +29,15 @@ requirements:
     - {{ pin_compatible('numpy') }}
 
 test:
+  commands:
+    - pip check
   imports:
     - lda
     - lda.datasets
     - lda.utils
-
   requires:
-    - pbr
-    - numpy
+    - pip
+    - python
 
 about:
   home: https://lda.readthedocs.io/en/latest/
