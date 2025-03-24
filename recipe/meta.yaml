@@ -18,7 +18,8 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
-    - ninja
+    - meson-python                  # [build_platform != target_platform]
+    - python                        # [build_platform != target_platform]
   host:
     - cython
     - meson-python
