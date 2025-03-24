@@ -12,8 +12,10 @@ source:
 build:
   number: 0
   script:
-    - rm ${PREFIX}/bin/ninja             # [build_platform != target_platform]
-    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    # Need to parse MESON_ARGS to make sure meson finds the correct executables for cross-compilation.
+    - $PYTHON -m build -w -n -x -Csetup-args=${MESON_ARGS// / -Csetup-args=}    # [unix]
+    - $PYTHON -m pip install dist/lda*.whl                                      # [unix]
+    - python -m pip install . -vv                                               # [win]
   skip: True  # [py<310]
 
 requirements:
@@ -29,6 +31,7 @@ requirements:
     - pip
     - poetry-core
     - python
+    - python-build
   run:
     - python
     - {{ pin_compatible('numpy') }}
