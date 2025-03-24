@@ -11,17 +11,21 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  script:
+    - rm ${PREFIX}/bin/ninja        # [build_platform != target_platform]
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   skip: True  # [py<310]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
-    - meson-python
+    - cross_python                  # [build_platform != target_platform]
+    - meson-python                  # [build_platform != target_platform]
     - python                        # [build_platform != target_platform]
   host:
     - cython
+    - meson-python
     - pip
     - poetry-core
     - python
