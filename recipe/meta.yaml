@@ -18,11 +18,10 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
-    - meson-python                  # [build_platform != target_platform]
+    - meson-python
     - python                        # [build_platform != target_platform]
   host:
     - cython
-    - meson-python
     - pip
     - poetry-core
     - python
