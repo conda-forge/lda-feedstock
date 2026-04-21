@@ -10,13 +10,14 @@ source:
   sha256: d8d7c0bc42208902a9e34261b76793a84f59e6c69cfd7ca12ce982cdaf7c3020
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . -vv
   skip: true  # [py>=37]
 
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
 
 
   host:
@@ -29,7 +30,6 @@ requirements:
 
   run:
     - python
-    - {{ pin_compatible('numpy') }}
     - pbr
 
 test:
