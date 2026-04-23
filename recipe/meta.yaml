@@ -1,51 +1,55 @@
 {% set name = "lda" %}
-{% set version = "2.0.0" %}
+{% set version = "3.0.2" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: d8d7c0bc42208902a9e34261b76793a84f59e6c69cfd7ca12ce982cdaf7c3020
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 76fc6fbb066b6d1ec0360a1541c5e1c8b69a728666525e72644c4d5332fc778a
 
 build:
-  number: 1
-  script: {{ PYTHON }} -m pip install . -vv
-  skip: true  # [py>=37]
+  number: 0
+  script:
+    # Need to parse MESON_ARGS to make sure meson finds the correct executables for cross-compilation.
+    - $PYTHON -m build -w -n -x -Csetup-args=${MESON_ARGS// / -Csetup-args=}    # [unix]
+    - $PYTHON -m pip install dist/lda*.whl                                      # [unix]
+    - python -m pip install . -vv                                               # [win]
+  skip: True  # [py<310]
 
 requirements:
   build:
     - {{ compiler('c') }}
-
-
+    - {{ stdlib('c') }}
+    - cross-python_{{ target_platform }} # [build_platform != target_platform]
+    - meson-python                       # [build_platform != target_platform]
+    - python                             # [build_platform != target_platform]
   host:
-    - pip
-    - python
-    - numpy
-    - pbr
-    - setuptools
     - cython
-
+    - meson-python
+    - pip
+    - poetry-core
+    - python
+    - python-build
   run:
     - python
     - {{ pin_compatible('numpy') }}
-    - pbr
 
 test:
+  commands:
+    - pip check
   imports:
     - lda
     - lda.datasets
     - lda.utils
-
   requires:
-    - pbr
-    - numpy
+    - pip
+    - python
 
 about:
   home: https://lda.readthedocs.io/en/latest/
   license: MPL-2.0
-  license_family: MOZILLA
   license_file: LICENSE
   summary: lda implements latent Dirichlet allocation (LDA) using collapsed Gibbs sampling. lda is fast and is tested on Linux, OS X, and Windows.
   doc_url: https://lda.readthedocs.io/en/latest/
@@ -53,6 +57,7 @@ about:
 
 extra:
   recipe-maintainers:
+    - danielnachun
     - mxr-conda
     - mwilson8
     - rluria14
